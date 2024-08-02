@@ -6,7 +6,7 @@ namespace Empleados{
         private char EC; //C: Casado, S: Soltero
         private DateTime ingreso;
         private double sueldo;
-        public enum cargo
+        public enum Cargo
         {
             Auxiliar,
             Administrativo,
@@ -14,15 +14,15 @@ namespace Empleados{
             Especialista,
             Investigador
         };
-        private cargo cargoE;
+        private Cargo cargoE;
 
-        public string Nombre { get => nombre; set => nombre=value};
-        public string Apellido { get => apellido; set => apellido=value};
-        public DateTime Nacimiento { get => nombre; set => nombre=value};
-        public char EstadoC { get => EC; set => EC=value}; //C: Casado, S: Soltero
-        public DateTime Ingreso { get => ingreso; set => ingreso=value};
-        public double Sueldo { get => sueldo; set => sueldo=value};
-        public cargo CargoE { get => cargoE; set => cargoE=value};
+        public string Nombre { get => nombre; set => nombre=value; }
+        public string Apellido { get => apellido; set => apellido=value; }
+        public DateTime Nacimiento { get => nacimiento; set => nacimiento=value; }
+        public char EstadoC { get => EC; set => EC=value; } //C: Casado, S: Soltero
+        public DateTime Ingreso { get => ingreso; set => ingreso=value; }
+        public double Sueldo { get => sueldo; set => sueldo=value; }
+        public Cargo CargoE { get => cargoE; set => cargoE=value; }
 
         private int Antiguedad(){
             int antiguedad =  DateTime.Today.Year - this.ingreso.Year;
@@ -32,7 +32,7 @@ namespace Empleados{
             }
             return antiguedad;
         }
-        private int Edad(){
+        public int Edad(){
             int edad =  DateTime.Today.Year - nacimiento.Year;
             return edad;
         }
@@ -42,21 +42,20 @@ namespace Empleados{
             return jubila;
         }
 
-        private float Salario(){
-            float salario=0;
-            float adicional=0;
+        private double Salario(){
+            double adicional=0;
             if (this.Antiguedad() <20){
-                adicional+=(this.sueldo*this.Antiguedad())/100;
+                adicional+= (this.sueldo*this.Antiguedad())/100;
             }else{
-                adicional+=this.sueldo*0.25;
+                adicional+= this.sueldo*0.25;
             }
 
             switch (this.cargoE)
             {
-                case 2:
+                case Cargo.Especialista:
                     adicional+=this.sueldo*0.5;
                     break;
-                case 3:
+                case Cargo.Ingeniero:
                     adicional+=this.sueldo*0.5;
                     break;
                 default:
@@ -68,7 +67,7 @@ namespace Empleados{
                 adicional+=150000;
             }
 
-            return salario = this.sueldo+adicional;
+            return this.sueldo+adicional;
         }
 
         public void MostrarDatos(Empleado empleado){
