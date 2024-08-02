@@ -25,7 +25,11 @@ namespace Empleados{
         public cargo CargoE { get => cargoE; set => cargoE=value};
 
         private int Antiguedad(){
-            int antiguedad =  DateTime.Today.Year - ingreso.Year;
+            int antiguedad =  DateTime.Today.Year - this.ingreso.Year;
+            if (DateTime.Today.DayOfYear < this.ingreso.DayOfYear)
+            {
+                antiguedad--;
+            }
             return antiguedad;
         }
         private int Edad(){
@@ -40,7 +44,31 @@ namespace Empleados{
 
         private float Salario(){
             float salario=0;
-            return salario;
+            float adicional=0;
+            if (this.Antiguedad() <20){
+                adicional+=(this.sueldo*this.Antiguedad())/100;
+            }else{
+                adicional+=this.sueldo*0.25;
+            }
+
+            switch (this.cargoE)
+            {
+                case 2:
+                    adicional+=this.sueldo*0.5;
+                    break;
+                case 3:
+                    adicional+=this.sueldo*0.5;
+                    break;
+                default:
+                    adicional=adicional;
+                    break;
+            }
+
+            if(this.EC == 'C'){
+                adicional+=150000;
+            }
+
+            return salario = this.sueldo+adicional;
         }
 
     }
