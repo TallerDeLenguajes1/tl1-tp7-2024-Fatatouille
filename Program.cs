@@ -6,7 +6,6 @@ Empleado[] empleados = new Empleado[3];
 Empleado mayor= new Empleado();
 string nacimiento;
 int cargo, year=2023;
-DateTime actual;
 
 for (int i=0; i<3; i++){
     empleados[i] = new Empleado();
@@ -19,8 +18,11 @@ for (int i=0; i<3; i++){
 
     Console.WriteLine("Fecha de nacimiento: ");
     nacimiento = Console.ReadLine();
-    empleados[i].Nacimiento= DateTime.ParseExact(nacimiento, "ddMMyy", CultureInfo.InvariantCulture);
-    actual = DateTime.ParseExact(nacimiento, "ddMMyy", CultureInfo.InvariantCulture);
+    empleados[i].Nacimiento= DateTime.ParseExact(nacimiento, "ddMMyyyy", CultureInfo.InvariantCulture);
+
+    Console.WriteLine("Fecha de ingreso: ");
+    nacimiento = Console.ReadLine();
+    empleados[i].Ingreso= DateTime.ParseExact(nacimiento, "ddMMyyyy", CultureInfo.InvariantCulture);
 
     Console.WriteLine("Estado civil: ");
     empleados[i].EstadoC = Convert.ToChar(Console.ReadLine());
@@ -32,30 +34,31 @@ for (int i=0; i<3; i++){
     cargo = Convert.ToInt32(Console.ReadLine());
 
     switch (cargo)
-        {
-            case 0:
-                empleados[i].CargoE = Empleado.Cargo.Auxiliar;
-                break;
-            case 1:
-                empleados[i].CargoE = Empleado.Cargo.Administrativo;
-                break;
-            case 2:
-                empleados[i].CargoE = Empleado.Cargo.Ingeniero;
-                break;
-            case 3:
-                empleados[i].CargoE = Empleado.Cargo.Especialista;
-                break;
-            case 4:
-                empleados[i].CargoE = Empleado.Cargo.Investigador;
-                break;
-            default:
-                Console.WriteLine("No se ingresó un cargo válido.");
-                break;
-        }
-    if (actual.Year < year){
-        year= actual.Year;
+    {
+        case 0:
+            empleados[i].CargoE = Empleado.Cargo.Auxiliar;
+            break;
+        case 1:
+            empleados[i].CargoE = Empleado.Cargo.Administrativo;
+            break;
+        case 2:
+            empleados[i].CargoE = Empleado.Cargo.Ingeniero;
+            break;
+        case 3:
+            empleados[i].CargoE = Empleado.Cargo.Especialista;
+            break;
+        case 4:
+            empleados[i].CargoE = Empleado.Cargo.Investigador;
+            break;
+        default:
+            Console.WriteLine("No se ingresó un cargo válido.");
+            break;
+    }
+    if (empleados[i].Nacimiento.Year < year)
+    {
+        year = empleados[i].Nacimiento.Year;
         mayor = empleados[i];
     }
 }
 
-mayor.MostrarDatos(mayor);
+mayor.MostrarDatos();

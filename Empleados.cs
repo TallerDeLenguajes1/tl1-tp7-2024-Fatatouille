@@ -70,10 +70,11 @@ namespace Empleados{
             return this.sueldo+adicional;
         }
 
-        public void MostrarDatos(Empleado empleado){
-            Console.WriteLine($"El empleado mas proximo a jubilarse es: {empleado.apellido}, {empleado.nombre}.");
-            Console.WriteLine($"Lleva {empleado.Antiguedad()} anos en la empresa, tiene {empleado.Edad()} y se jubila en {empleado.Jubilacion()}.");
-            Console.WriteLine($"Su salario es de {empleado.Salario()}.");
+        public void MostrarDatos()
+        {
+            Console.WriteLine($"El empleado más próximo a jubilarse es: {this.apellido}, {this.nombre}.");
+            Console.WriteLine($"Lleva {this.Antiguedad()} años en la empresa, tiene {this.Edad()} y se jubila en {this.Jubilacion()}.");
+            Console.WriteLine($"Su salario es de {this.Salario()}.");
         }
     }
 }
